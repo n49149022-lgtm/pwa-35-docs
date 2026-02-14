@@ -3,86 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>35 генераторов документов</title>
+    <title>Магазин шаблонов документов</title>
     <link rel="stylesheet" href="/pwa-35-docs/css/style.css">
+    <style>
+        .module-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .module-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .module-price::after {
+            content: " ₽";
+        }
+        .buy-button {
+            background: #ffc107;
+            color: #212529;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .buy-button:hover {
+            background: #e0a800;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>📄 Генераторы документов</h1>
-        <p>35 готовых шаблонов</p>
+        <h1>📄 Шаблоны документов</h1>
+        <p>35 готовых шаблонов. Выберите нужный и нажмите "Купить"</p>
     </header>
 
     <main>
-        <div class="modules-grid" id="modulesGrid">
-            <!-- Категории и модули будут добавлены через JavaScript -->
-        </div>
+        <div class="modules-grid" id="modulesGrid"></div>
     </main>
 
     <script>
-        // Простой и надежный скрипт
         const modules = [
-            { file: "shtraf.html", name: "Обжалование штрафа", cat: "Штрафы" },
-            { file: "shtraf-gibdd.html", name: "Обжалование штрафа ГИБДД", cat: "Штрафы" },
-            { file: "zhaloba-shtraf.html", name: "Жалоба на штраф", cat: "Штрафы" },
-            { file: "zhaloba-uk.html", name: "Жалоба в УК", cat: "Жалобы" },
-            { file: "zhaloba-bank.html", name: "Жалоба на банк", cat: "Жалобы" },
-            { file: "zhaloba-strahovaya.html", name: "Жалоба на страховую", cat: "Жалобы" },
-            { file: "zhaloba-detsad.html", name: "Жалоба на детский сад", cat: "Жалобы" },
-            { file: "zhaloba-taksi.html", name: "Жалоба на такси", cat: "Жалобы" },
-            { file: "zhaloba-autoservice.html", name: "Жалоба на автосервис", cat: "Жалобы" },
-            { file: "zhaloba-svyaz.html", name: "Жалоба на связь", cat: "Жалобы" },
-            { file: "pretenziya-internet.html", name: "Претензия провайдеру", cat: "Жалобы" },
-            { file: "pretenziya-tehnika.html", name: "Претензия на технику", cat: "Жалобы" },
-            { file: "pretenziya-zhkh.html", name: "Претензия ЖКХ", cat: "Жалобы" },
-            { file: "dogovor-kruzhok.html", name: "Договор с кружком", cat: "Договоры" },
-            { file: "dogovor-nyanya.html", name: "Договор с няней", cat: "Договоры" },
-            { file: "dogovor-repetitor.html", name: "Договор с репетитором", cat: "Договоры" },
-            { file: "dogovor-kupli-prodazhi.html", name: "Договор купли-продажи", cat: "Договоры" },
-            { file: "alimenty.html", name: "Алименты", cat: "Семейные" },
-            { file: "soglasie-rebenok.html", name: "Согласие на выезд ребенка", cat: "Семейные" },
-            { file: "doverennost-avto.html", name: "Доверенность на авто", cat: "Авто" },
-            { file: "putevoy-list.html", name: "Путевой лист", cat: "Авто" },
-            { file: "ip-usn6.html", name: "ИП на УСН 6%", cat: "Бизнес" },
-            { file: "kudir.html", name: "КУДиР", cat: "Бизнес" },
-            { file: "shtatnoe-raspisanie.html", name: "Штатное расписание", cat: "Бизнес" },
-            { file: "pereraschet-zhkh.html", name: "Перерасчет ЖКХ", cat: "ЖКХ" },
-            { file: "subsidiya-zhkh.html", name: "Субсидия ЖКХ", cat: "ЖКХ" },
-            { file: "nizhe-tarifa.html", name: "Перерасчет (ниже тарифа)", cat: "ЖКХ" },
-            { file: "protokol-tszh.html", name: "Протокол ТСЖ", cat: "ЖКХ" },
-            { file: "aviakompensaciya.html", name: "Авиакомпенсация", cat: "Транспорт" },
-            { file: "zaderzhka-reysa.html", name: "Задержка рейса", cat: "Транспорт" },
-            { file: "vozvrat-tura.html", name: "Возврат тура", cat: "Разное" },
-            { file: "isk-zayavlenie.html", name: "Исковое заявление", cat: "Разное" },
-            { file: "raspiska-telefon.html", name: "Расписка за телефон", cat: "Разное" },
-            { file: "spravka-sadik.html", name: "Справка в детский сад", cat: "Разное" },
-            { file: "template.html", name: "Шаблон документа", cat: "Разное" }
+            // Штрафы - 299
+            { file: "shtraf.html", name: "Обжалование штрафа", price: 299 },
+            { file: "shtraf-gibdd.html", name: "Обжалование штрафа ГИБДД", price: 299 },
+            { file: "zhaloba-shtraf.html", name: "Жалоба на штраф", price: 299 },
+            
+            // Жалобы - 199
+            { file: "zhaloba-uk.html", name: "Жалоба в УК", price: 199 },
+            { file: "zhaloba-bank.html", name: "Жалоба на банк", price: 199 },
+            { file: "zhaloba-strahovaya.html", name: "Жалоба на страховую", price: 199 },
+            { file: "zhaloba-detsad.html", name: "Жалоба на детский сад", price: 199 },
+            { file: "zhaloba-taksi.html", name: "Жалоба на такси", price: 199 },
+            { file: "zhaloba-autoservice.html", name: "Жалоба на автосервис", price: 199 },
+            { file: "zhaloba-svyaz.html", name: "Жалоба на связь", price: 199 },
+            { file: "pretenziya-internet.html", name: "Претензия провайдеру", price: 199 },
+            { file: "pretenziya-tehnika.html", name: "Претензия на технику", price: 199 },
+            { file: "pretenziya-zhkh.html", name: "Претензия ЖКХ", price: 199 },
+            
+            // Договоры - 299
+            { file: "dogovor-kruzhok.html", name: "Договор с кружком", price: 299 },
+            { file: "dogovor-nyanya.html", name: "Договор с няней", price: 299 },
+            { file: "dogovor-repetitor.html", name: "Договор с репетитором", price: 299 },
+            { file: "dogovor-kupli-prodazhi.html", name: "Договор купли-продажи", price: 299 },
+            
+            // Семейные
+            { file: "alimenty.html", name: "Алименты", price: 399 },
+            { file: "soglasie-rebenok.html", name: "Согласие на выезд ребенка", price: 99 },
+            
+            // Авто - 199
+            { file: "doverennost-avto.html", name: "Доверенность на авто", price: 199 },
+            { file: "putevoy-list.html", name: "Путевой лист", price: 199 },
+            
+            // Бизнес - 299
+            { file: "ip-usn6.html", name: "ИП на УСН 6%", price: 299 },
+            { file: "kudir.html", name: "КУДиР", price: 299 },
+            { file: "shtatnoe-raspisanie.html", name: "Штатное расписание", price: 299 },
+            
+            // ЖКХ - 199
+            { file: "pereraschet-zhkh.html", name: "Перерасчет ЖКХ", price: 199 },
+            { file: "subsidiya-zhkh.html", name: "Субсидия ЖКХ", price: 199 },
+            { file: "nizhe-tarifa.html", name: "Перерасчет (ниже тарифа)", price: 199 },
+            { file: "protokol-tszh.html", name: "Протокол ТСЖ", price: 199 },
+            
+            // Премиум - 399
+            { file: "aviakompensaciya.html", name: "Авиакомпенсация", price: 399 },
+            { file: "zaderzhka-reysa.html", name: "Задержка рейса", price: 399 },
+            { file: "vozvrat-tura.html", name: "Возврат тура", price: 399 },
+            { file: "isk-zayavlenie.html", name: "Исковое заявление", price: 399 },
+            
+            // Дешевые - 99
+            { file: "raspiska-telefon.html", name: "Расписка за телефон", price: 99 },
+            { file: "spravka-sadik.html", name: "Справка в детский сад", price: 99 },
+            { file: "template.html", name: "Шаблон документа", price: 99 }
         ];
 
-        // Группировка по категориям
+        // Отображаем все модули подряд (без категорий)
         const grid = document.getElementById('modulesGrid');
-        const categories = {};
         
-        modules.forEach(m => {
-            if (!categories[m.cat]) categories[m.cat] = [];
-            categories[m.cat].push(m);
+        modules.sort((a, b) => a.name.localeCompare(b.name)).forEach(m => {
+            const card = document.createElement('div');
+            card.className = 'module-card';
+            card.innerHTML = 
+                <div style="font-weight: bold; font-size: 1.1rem;"></div>
+                <div class="module-price"></div>
+                <button class="buy-button" onclick="buyModule('', '', )">Купить</button>
+            ;
+            grid.appendChild(card);
         });
 
-        // Отображение
-        Object.keys(categories).sort().forEach(cat => {
-            // Заголовок категории
-            const title = document.createElement('h2');
-            title.className = 'category-title';
-            title.textContent = cat;
-            grid.appendChild(title);
-            
-            // Карточки модулей
-            categories[cat].forEach(m => {
-                const card = document.createElement('div');
-                card.className = 'module-card';
-                card.innerHTML = <a href="/pwa-35-docs/modules/"></a>;
-                grid.appendChild(card);
-            });
-        });
+        // Функция покупки
+        function buyModule(file, name, price) {
+            alert(Покупка: zhaloba-uk\nЦена: ₽\n\nЗдесь будет подключена оплата через ЮKassa);
+            // Здесь будет реальная интеграция с платежной системой
+        }
     </script>
 </body>
 </html>
