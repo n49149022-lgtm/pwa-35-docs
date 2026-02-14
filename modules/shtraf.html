@@ -3,120 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обжалование штрафа</title>
+    <title>shtraf</title>
     <style>
         body { font-family: Arial; max-width: 800px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
-        .nav { display: flex; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .form-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
-        .price-block { text-align: center; margin: 30px 0 20px; }
+        h1 { text-align: center; margin-bottom: 20px; }
+        .nav { margin-bottom: 20px; }
+        .form-container { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .price-block { text-align: center; margin: 30px 0; }
         .price { font-size: 32px; font-weight: bold; color: #28a745; }
-        .download-btn { 
+        .btn { 
             background: #ffc107; 
-            color: #212529; 
             border: none; 
-            border-radius: 50px; 
-            padding: 15px 50px; 
+            padding: 15px 40px; 
             font-size: 18px; 
             font-weight: bold; 
+            border-radius: 50px; 
             cursor: pointer; 
             transition: all 0.3s;
         }
-        .download-btn:hover { background: #e0a800; transform: translateY(-2px); }
+        .btn:hover { background: #e0a800; transform: translateY(-2px); }
         a { color: #0066cc; text-decoration: none; }
         a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <div><a href="/pwa-35-docs/">← На главную</a></div>
-        <div>
-            <a href="shtraf-gibdd.html">← Предыдущий</a> | 
-            <a href="zhaloba-shtraf.html">Следующий →</a>
-        </div>
+    <div style="display: flex; justify-content: space-between; background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <div><a href="/pwa-35-docs/" style="color: #0066cc;">← На главную</a></div>
+    <div>
+        <a href='shtatnoe-raspisanie.html' style='color: #0066cc;'>← Предыдущий</a>
+        |
+        <a href='shtraf-gibdd.html' style='color: #0066cc;'>Следующий →</a>
     </div>
-
-    <div class="form-container">
-        <h1 style="text-align: center; margin-bottom: 30px;">Обжалование штрафа</h1>
-        
-        <form id="docForm">
-            <div class="form-group">
-                <label>ФИО:</label>
-                <input type="text" id="fio" placeholder="Иванов Иван Иванович">
-            </div>
-            
-            <div class="form-group">
-                <label>Номер постановления:</label>
-                <input type="text" id="docNumber" placeholder="18810177210123456789">
-            </div>
-            
-            <div class="form-group">
-                <label>Дата постановления:</label>
-                <input type="date" id="docDate">
-            </div>
-            
-            <div class="form-group">
-                <label>Сумма штрафа (руб.):</label>
-                <input type="number" id="sum" placeholder="5000">
-            </div>
-            
-            <div class="form-group">
-                <label>Регион:</label>
-                <select id="region">
+</div>
+    
+    <h1>shtraf</h1>
+    
+        <div class="form-container" style="max-width: 600px; margin: 20px auto; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center; margin-bottom: 25px;">Заполните данные</h2>
+        <form id="docForm" style="display: flex; flex-direction: column; gap: 15px;">            <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">ФИО:</label><input type="text" id="fio" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+            <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Номер постановления:</label><input type="text" id="docNumber" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+            <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Дата постановления:</label><input type="date" id="docDate" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>
+            <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Сумма штрафа:</label><input type="number" id="sum" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></div>            <div><label style="display: block; margin-bottom: 5px; font-weight: bold;">Регион:</label>
+                <select id="region" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
                     <option value="msk">Москва</option>
                     <option value="spb">Санкт-Петербург</option>
                     <option value="mo">Московская область</option>
+                    <option value="lo">Ленинградская область</option>
                     <option value="other">Другой регион</option>
                 </select>
-            </div>
-        </form>
-
-        <div class="price-block">
-            <div class="price">299 ₽</div>
-            <button class="download-btn" onclick="downloadDocument()">📥 Скачать за 299 ₽</button>
-            <p style="color: #666; margin-top: 10px;">После оплаты документ сформируется и скачается</p>
-        </div>
+            </div>        </form>
+    </div>
+    
+    <div class="price-block">
+        <div class="price">299 ₽</div>
+        <button class="btn" onclick="downloadDocument()">📥 Скачать за 299 ₽</button>
+        <p style="color: #666; margin-top: 10px;">После оплаты документ сформируется и скачается</p>
     </div>
 
     <script>
         function downloadDocument() {
-            const fio = document.getElementById('fio').value || 'Не указано';
-            const docNumber = document.getElementById('docNumber').value || 'Не указан';
-            const docDate = document.getElementById('docDate').value || 'Не указана';
-            const sum = document.getElementById('sum').value || 'Не указана';
-            const region = document.getElementById('region').value;
+            // Собираем данные из формы
+            const formData = {};
+            const inputs = document.querySelectorAll('#docForm input, #docForm select, #docForm textarea');
+            inputs.forEach(input => {
+                formData[input.id] = input.value || 'Не указано';
+            });
             
-            const regionText = {
-                'msk': 'Москва',
-                'spb': 'Санкт-Петербург',
-                'mo': 'Московская область',
-                'other': 'другой регион'
-            }[region] || 'другой регион';
+            // Формируем документ (пример для штрафа)
+            let docText = 'ДОКУМЕНТ\\n\\n';
+            for (let key in formData) {
+                docText += \: \\\n;
+            }
             
-            const docText = ЖАЛОБА НА ПОСТАНОВЛЕНИЕ ПО ДЕЛУ ОБ АДМИНИСТРАТИВНОМ ПРАВОНАРУШЕНИИ
-
-Дата: 
-ФИО: 
-Регион: 
-
-Постановление № от 
-Сумма штрафа:  руб.
-
-С указанным постановлением не согласен, считаю его незаконным и необоснованным по следующим основаниям:
-
-[текст жалобы]
-
-На основании изложенного, прошу:
-1. Отменить постановление №
-2. Прекратить производство по делу
-
-__________________ //
-;
+            alert('Демо-режим: документ готов к скачиванию\\n(реальная оплата будет через Енот)');
             
-            alert('Демо-режим: оплата не требуется');
-            
+            // Скачиваем
             const blob = new Blob([docText], {type: 'text/plain'});
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
