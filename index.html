@@ -1,126 +1,141 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- force update: 2026-02-14 12:17:27 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин шаблонов документов</title>
-    <link rel="stylesheet" href="/pwa-35-docs/css/style.css">
+    <title>35 шаблонов документов</title>
     <style>
-        .module-card {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
         }
-        .module-price {
-            font-size: 1.3rem;
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .card h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        .price {
+            font-size: 1.8rem;
             font-weight: bold;
             color: #28a745;
+            margin-bottom: 15px;
         }
-        .module-price::after {
+        .price::after {
             content: " ₽";
         }
-        .buy-button {
+        .buy-btn {
             background: #ffc107;
             color: #212529;
             border: none;
             border-radius: 6px;
-            padding: 0.5rem;
+            padding: 12px;
+            width: 100%;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .buy-button:hover {
+        .buy-btn:hover {
             background: #e0a800;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>📄 Шаблоны документов</h1>
-        <p>35 готовых шаблонов. Выберите нужный и нажмите "Купить"</p>
-    </header>
-
-    <main>
-        <div class="modules-grid" id="modulesGrid"></div>
-    </main>
+    <div class="header">
+        <h1>📄 35 шаблонов документов</h1>
+        <p>Выберите нужный шаблон и нажмите "Купить"</p>
+    </div>
+    
+    <div class="grid" id="grid"></div>
 
     <script>
-        const modules = [
-            // Штрафы - 299
-            { file: "shtraf.html", name: "Обжалование штрафа", price: 299 },
-            { file: "shtraf-gibdd.html", name: "Обжалование штрафа ГИБДД", price: 299 },
-            { file: "zhaloba-shtraf.html", name: "Жалоба на штраф", price: 299 },
-            
-            // Жалобы - 199
-            { file: "zhaloba-uk.html", name: "Жалоба в УК", price: 199 },
-            { file: "zhaloba-bank.html", name: "Жалоба на банк", price: 199 },
-            { file: "zhaloba-strahovaya.html", name: "Жалоба на страховую", price: 199 },
-            { file: "zhaloba-detsad.html", name: "Жалоба на детский сад", price: 199 },
-            { file: "zhaloba-taksi.html", name: "Жалоба на такси", price: 199 },
-            { file: "zhaloba-autoservice.html", name: "Жалоба на автосервис", price: 199 },
-            { file: "zhaloba-svyaz.html", name: "Жалоба на связь", price: 199 },
-            { file: "pretenziya-internet.html", name: "Претензия провайдеру", price: 199 },
-            { file: "pretenziya-tehnika.html", name: "Претензия на технику", price: 199 },
-            { file: "pretenziya-zhkh.html", name: "Претензия ЖКХ", price: 199 },
-            
-            // Договоры - 299
-            { file: "dogovor-kruzhok.html", name: "Договор с кружком", price: 299 },
-            { file: "dogovor-nyanya.html", name: "Договор с няней", price: 299 },
-            { file: "dogovor-repetitor.html", name: "Договор с репетитором", price: 299 },
-            { file: "dogovor-kupli-prodazhi.html", name: "Договор купли-продажи", price: 299 },
-            
-            // Семейные
-            { file: "alimenty.html", name: "Алименты", price: 399 },
-            { file: "soglasie-rebenok.html", name: "Согласие на выезд ребенка", price: 99 },
-            
-            // Авто - 199
-            { file: "doverennost-avto.html", name: "Доверенность на авто", price: 199 },
-            { file: "putevoy-list.html", name: "Путевой лист", price: 199 },
-            
-            // Бизнес - 299
-            { file: "ip-usn6.html", name: "ИП на УСН 6%", price: 299 },
-            { file: "kudir.html", name: "КУДиР", price: 299 },
-            { file: "shtatnoe-raspisanie.html", name: "Штатное расписание", price: 299 },
-            
-            // ЖКХ - 199
-            { file: "pereraschet-zhkh.html", name: "Перерасчет ЖКХ", price: 199 },
-            { file: "subsidiya-zhkh.html", name: "Субсидия ЖКХ", price: 199 },
-            { file: "nizhe-tarifa.html", name: "Перерасчет (ниже тарифа)", price: 199 },
-            { file: "protokol-tszh.html", name: "Протокол ТСЖ", price: 199 },
-            
-            // Премиум - 399
-            { file: "aviakompensaciya.html", name: "Авиакомпенсация", price: 399 },
-            { file: "zaderzhka-reysa.html", name: "Задержка рейса", price: 399 },
-            { file: "vozvrat-tura.html", name: "Возврат тура", price: 399 },
-            { file: "isk-zayavlenie.html", name: "Исковое заявление", price: 399 },
-            
-            // Дешевые - 99
-            { file: "raspiska-telefon.html", name: "Расписка за телефон", price: 99 },
-            { file: "spravka-sadik.html", name: "Справка в детский сад", price: 99 },
-            { file: "template.html", name: "Шаблон документа", price: 99 }
+        const templates = [
+            { name: "Обжалование штрафа", price: 299 },
+            { name: "Обжалование штрафа ГИБДД", price: 299 },
+            { name: "Жалоба на штраф", price: 299 },
+            { name: "Жалоба в УК", price: 199 },
+            { name: "Жалоба на банк", price: 199 },
+            { name: "Жалоба на страховую", price: 199 },
+            { name: "Жалоба на детский сад", price: 199 },
+            { name: "Жалоба на такси", price: 199 },
+            { name: "Жалоба на автосервис", price: 199 },
+            { name: "Жалоба на связь", price: 199 },
+            { name: "Претензия провайдеру", price: 199 },
+            { name: "Претензия на технику", price: 199 },
+            { name: "Претензия ЖКХ", price: 199 },
+            { name: "Договор с кружком", price: 299 },
+            { name: "Договор с няней", price: 299 },
+            { name: "Договор с репетитором", price: 299 },
+            { name: "Договор купли-продажи", price: 299 },
+            { name: "Алименты", price: 399 },
+            { name: "Согласие на выезд ребенка", price: 99 },
+            { name: "Доверенность на авто", price: 199 },
+            { name: "Путевой лист", price: 199 },
+            { name: "ИП на УСН 6%", price: 299 },
+            { name: "КУДиР", price: 299 },
+            { name: "Штатное расписание", price: 299 },
+            { name: "Перерасчет ЖКХ", price: 199 },
+            { name: "Субсидия ЖКХ", price: 199 },
+            { name: "Перерасчет (ниже тарифа)", price: 199 },
+            { name: "Протокол ТСЖ", price: 199 },
+            { name: "Авиакомпенсация", price: 399 },
+            { name: "Задержка рейса", price: 399 },
+            { name: "Возврат тура", price: 399 },
+            { name: "Исковое заявление", price: 399 },
+            { name: "Расписка за телефон", price: 99 },
+            { name: "Справка в детский сад", price: 99 },
+            { name: "Шаблон документа", price: 99 }
         ];
 
-        // Отображаем все модули подряд (без категорий)
-        const grid = document.getElementById('modulesGrid');
+        const grid = document.getElementById('grid');
         
-        modules.sort((a, b) => a.name.localeCompare(b.name)).forEach(m => {
+        templates.sort((a, b) => a.name.localeCompare(b.name)).forEach(t => {
             const card = document.createElement('div');
-            card.className = 'module-card';
-            card.innerHTML = 
-                <div style="font-weight: bold; font-size: 1.1rem;"></div>
-                <div class="module-price"></div>
-                <button class="buy-button" onclick="buyModule('', '', )">Купить</button>
-            ;
+            card.className = 'card';
+            card.innerHTML = \
+                <h3>\</h3>
+                <div class="price">\</div>
+                <button class="buy-btn" onclick="buy('\', \)">Купить</button>
+            \;
             grid.appendChild(card);
         });
 
-        // Функция покупки
-        function buyModule(file, name, price) {
-            alert(Покупка: zhaloba-uk\nЦена: ₽\n\nЗдесь будет подключена оплата через ЮKassa);
-            // Здесь будет реальная интеграция с платежной системой
+        function buy(name, price) {
+            alert(\Покупка: \zhaloba-uk\nЦена: \ ₽\n\nЗдесь будет интеграция с ЮKassa\);
         }
     </script>
 </body>
 </html>
-
