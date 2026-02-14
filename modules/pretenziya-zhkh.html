@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Претензия ЖКХ | Жалоба</title>
+    <link rel="stylesheet" href="/pwa-35-docs/css/style.css">
+    <link rel="manifest" href="/pwa-35-docs/manifest.json">
+</head>
+<body>
+    <div class="nav">
+        <a href="/pwa-35-docs/">← На главную</a>
+    </div>
+    
+    <div class="module-container">
+        <h1>Претензия ЖКХ</h1>
+        
+        <form id="zhalobaForm">
+            <div class="form-group">
+                <label for="fio">ФИО заявителя:</label>
+                <input type="text" id="fio" name="fio" placeholder="Иванов Иван Иванович" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="organization">Кому подается:</label>
+                <input type="text" id="organization" name="organization" placeholder="Наименование организации" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="problem">Суть жалобы:</label>
+                <textarea id="problem" name="problem" rows="4" placeholder="Опишите проблему..." required></textarea>
+            </div>
+            
+            <button type="button" class="btn" onclick="alert('Генерация жалобы в разработке')">Сформировать жалобу</button>
+        </form>
+    </div>
+</body>
+</html>

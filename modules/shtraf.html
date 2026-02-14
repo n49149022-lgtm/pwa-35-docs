@@ -1,17 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8">
-    <title>Модуль</title>
-    <link rel="stylesheet" href="/css/style.css">
-<script src="/js/bom-killer.js"></script></head>
-<body><div class="nav"><a href="/">← На главную</a></div>
-    <h1>Шаблон модуля</h1>
-    <p>Копируй этот файл для новых модулей</p>
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обжалование штрафа | Обжалование штрафа</title>
+    <link rel="stylesheet" href="/pwa-35-docs/css/style.css">
+    <link rel="manifest" href="/pwa-35-docs/manifest.json">
+</head>
+<body>
+    <div class="nav">
+        <a href="/pwa-35-docs/">← На главную</a>
+    </div>
+    
+    <div class="module-container">
+        <h1>Обжалование штрафа</h1>
+        
+        <form id="shtrafForm">
+            <div class="form-group">
+                <label for="fio">ФИО:</label>
+                <input type="text" id="fio" name="fio" placeholder="Иванов Иван Иванович" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="docNumber">Номер постановления:</label>
+                <input type="text" id="docNumber" name="docNumber" placeholder="18810177210123456789" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="docDate">Дата постановления:</label>
+                <input type="date" id="docDate" name="docDate" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="shtrafSum">Сумма штрафа:</label>
+                <input type="number" id="shtrafSum" name="shtrafSum" placeholder="5000" required>
+            </div>
+            
+            <button type="button" class="btn" onclick="alert('Генерация штрафа в разработке')">Сформировать жалобу</button>
+        </form>
+    </div>
 </body>
 </html>
-
-
-
-
-
-

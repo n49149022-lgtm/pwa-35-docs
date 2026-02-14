@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Договор купли-продажи | Договор</title>
+    <link rel="stylesheet" href="/pwa-35-docs/css/style.css">
+    <link rel="manifest" href="/pwa-35-docs/manifest.json">
+</head>
+<body>
+    <div class="nav">
+        <a href="/pwa-35-docs/">← На главную</a>
+    </div>
+    
+    <div class="module-container">
+        <h1>Договор купли-продажи</h1>
+        
+        <form id="dogovorForm">
+            <div class="form-group">
+                <label for="fio1">Сторона 1 (ФИО/Название):</label>
+                <input type="text" id="fio1" name="fio1" placeholder="Иванов И.И." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fio2">Сторона 2 (ФИО/Название):</label>
+                <input type="text" id="fio2" name="fio2" placeholder="Петров П.П." required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Предмет договора:</label>
+                <input type="text" id="subject" name="subject" placeholder="оказание услуг" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Сумма (руб.):</label>
+                <input type="number" id="price" name="price" placeholder="10000" required>
+            </div>
+            
+            <button type="button" class="btn" onclick="alert('Генерация договора в разработке')">Сформировать договор</button>
+        </form>
+    </div>
+</body>
+</html>
