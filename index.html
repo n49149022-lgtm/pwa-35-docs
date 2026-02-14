@@ -16,113 +16,113 @@
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="🔍 Поиск документов..." onkeyup="searchModules()">
         </div>
-        <div class="modules-count" id="modulesCount">Загрузка...</div>
+        <div class="modules-count" id="modulesCount">Всего документов: 35</div>
     </header>
 
     <main>
         <div class="modules-grid" id="modulesContainer">
-            <!-- JavaScript загрузит модули сюда -->
+            <!-- Сюда будут добавлены модули -->
         </div>
     </main>
 
     <script>
-        // Данные всех модулей
+        // Данные всех модулей (упрощенный вариант)
         const modulesData = [
+            // Штрафы
             { file: "shtraf.html", name: "Обжалование штрафа", category: "Штрафы", type: "shtraf" },
             { file: "shtraf-gibdd.html", name: "Обжалование штрафа ГИБДД", category: "Штрафы", type: "shtraf" },
             { file: "zhaloba-shtraf.html", name: "Жалоба на штраф", category: "Штрафы", type: "shtraf" },
             
-            { file: "zhaloba-uk.html", name: "Жалоба в УК", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "zhaloba-bank.html", name: "Жалоба на банк", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "zhaloba-strahovaya.html", name: "Жалоба на страховую", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "zhaloba-detsad.html", name: "Жалоба на детский сад", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "zhaloba-taksi.html", name: "Жалоба на такси", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "zhaloba-autoservice.html", name: "Жалоба на автосервис", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "zhaloba-svyaz.html", name: "Жалоба на связь", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "pretenziya-internet.html", name: "Претензия провайдеру", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "pretenziya-tehnika.html", name: "Претензия на технику", category: "Жалобы и претензии", type: "zhaloba" },
-            { file: "pretenziya-zhkh.html", name: "Претензия ЖКХ", category: "Жалобы и претензии", type: "zhaloba" },
+            // Жалобы
+            { file: "zhaloba-uk.html", name: "Жалоба в УК", category: "Жалобы", type: "zhaloba" },
+            { file: "zhaloba-bank.html", name: "Жалоба на банк", category: "Жалобы", type: "zhaloba" },
+            { file: "zhaloba-strahovaya.html", name: "Жалоба на страховую", category: "Жалобы", type: "zhaloba" },
+            { file: "zhaloba-detsad.html", name: "Жалоба на детский сад", category: "Жалобы", type: "zhaloba" },
+            { file: "zhaloba-taksi.html", name: "Жалоба на такси", category: "Жалобы", type: "zhaloba" },
+            { file: "zhaloba-autoservice.html", name: "Жалоба на автосервис", category: "Жалобы", type: "zhaloba" },
+            { file: "zhaloba-svyaz.html", name: "Жалоба на связь", category: "Жалобы", type: "zhaloba" },
+            { file: "pretenziya-internet.html", name: "Претензия провайдеру", category: "Жалобы", type: "zhaloba" },
+            { file: "pretenziya-tehnika.html", name: "Претензия на технику", category: "Жалобы", type: "zhaloba" },
+            { file: "pretenziya-zhkh.html", name: "Претензия ЖКХ", category: "Жалобы", type: "zhaloba" },
             
+            // Договоры
             { file: "dogovor-kruzhok.html", name: "Договор с кружком", category: "Договоры", type: "dogovor" },
             { file: "dogovor-nyanya.html", name: "Договор с няней", category: "Договоры", type: "dogovor" },
             { file: "dogovor-repetitor.html", name: "Договор с репетитором", category: "Договоры", type: "dogovor" },
             { file: "dogovor-kupli-prodazhi.html", name: "Договор купли-продажи", category: "Договоры", type: "dogovor" },
             
-            { file: "alimenty.html", name: "Алименты", category: "Семейное право", type: "default" },
-            { file: "soglasie-rebenok.html", name: "Согласие на выезд ребенка", category: "Семейное право", type: "default" },
+            // Семейные
+            { file: "alimenty.html", name: "Алименты", category: "Семейные", type: "default" },
+            { file: "soglasie-rebenok.html", name: "Согласие на выезд ребенка", category: "Семейные", type: "default" },
             
-            { file: "doverennost-avto.html", name: "Доверенность на авто", category: "Автомобильные", type: "default" },
-            { file: "putevoy-list.html", name: "Путевой лист", category: "Автомобильные", type: "default" },
+            // Авто
+            { file: "doverennost-avto.html", name: "Доверенность на авто", category: "Авто", type: "default" },
+            { file: "putevoy-list.html", name: "Путевой лист", category: "Авто", type: "default" },
             
+            // Бизнес
             { file: "ip-usn6.html", name: "ИП на УСН 6%", category: "Бизнес", type: "default" },
             { file: "kudir.html", name: "КУДиР", category: "Бизнес", type: "default" },
             { file: "shtatnoe-raspisanie.html", name: "Штатное расписание", category: "Бизнес", type: "default" },
             
+            // ЖКХ
             { file: "pereraschet-zhkh.html", name: "Перерасчет ЖКХ", category: "ЖКХ", type: "default" },
             { file: "subsidiya-zhkh.html", name: "Субсидия ЖКХ", category: "ЖКХ", type: "default" },
             { file: "nizhe-tarifa.html", name: "Перерасчет (ниже тарифа)", category: "ЖКХ", type: "default" },
             { file: "protokol-tszh.html", name: "Протокол ТСЖ", category: "ЖКХ", type: "default" },
             
+            // Транспорт
             { file: "aviakompensaciya.html", name: "Авиакомпенсация", category: "Транспорт", type: "default" },
             { file: "zaderzhka-reysa.html", name: "Задержка рейса", category: "Транспорт", type: "default" },
             
-            { file: "vozvrat-tura.html", name: "Возврат тура", category: "Туризм", type: "default" },
-            
-            { file: "isk-zayavlenie.html", name: "Исковое заявление", category: "Судебные", type: "default" },
-            
-            { file: "raspiska-telefon.html", name: "Расписка за телефон", category: "Бытовые", type: "default" },
-            { file: "spravka-sadik.html", name: "Справка в детский сад", category: "Бытовые", type: "default" },
-            { file: "template.html", name: "Шаблон документа", category: "Прочее", type: "default" }
+            // Остальные
+            { file: "vozvrat-tura.html", name: "Возврат тура", category: "Разное", type: "default" },
+            { file: "isk-zayavlenie.html", name: "Исковое заявление", category: "Разное", type: "default" },
+            { file: "raspiska-telefon.html", name: "Расписка за телефон", category: "Разное", type: "default" },
+            { file: "spravka-sadik.html", name: "Справка в детский сад", category: "Разное", type: "default" },
+            { file: "template.html", name: "Шаблон документа", category: "Разное", type: "default" }
         ];
 
-        // Функция получения бейджа по типу
-        function getBadgeClass(type) {
-            switch(type) {
-                case 'shtraf': return 'badge-shtraf';
-                case 'zhaloba': return 'badge-zhaloba';
-                case 'dogovor': return 'badge-dogovor';
-                default: return 'badge-default';
-            }
-        }
-
-        function getBadgeText(type) {
-            switch(type) {
-                case 'shtraf': return 'Штраф';
-                case 'zhaloba': return 'Жалоба';
-                case 'dogovor': return 'Договор';
-                default: return 'Документ';
-            }
-        }
-
-        // Функция отображения модулей
-        function displayModules(modulesToShow) {
+        // Функция отображения
+        function displayModules() {
             const container = document.getElementById('modulesContainer');
             container.innerHTML = '';
             
             // Группируем по категориям
-            const grouped = {};
-            modulesToShow.forEach(module => {
-                if (!grouped[module.category]) {
-                    grouped[module.category] = [];
+            const categories = {};
+            modulesData.forEach(module => {
+                if (!categories[module.category]) {
+                    categories[module.category] = [];
                 }
-                grouped[module.category].push(module);
+                categories[module.category].push(module);
             });
             
-            // Сортируем категории
-            const sortedCategories = Object.keys(grouped).sort();
-            
-            // Отображаем
-            sortedCategories.forEach(category => {
-                // Заголовок категории
-                const categoryTitle = document.createElement('h2');
-                categoryTitle.className = 'category-title';
-                categoryTitle.textContent = category;
-                container.appendChild(categoryTitle);
+            // Показываем каждую категорию
+            Object.keys(categories).sort().forEach(category => {
+                // Заголовок
+                const title = document.createElement('h2');
+                title.className = 'category-title';
+                title.textContent = category;
+                container.appendChild(title);
                 
-                // Модули категории
-                grouped[category].forEach(module => {
+                // Модули
+                categories[category].forEach(module => {
                     const card = document.createElement('div');
                     card.className = 'module-card';
+                    
+                    let badgeClass = 'badge-default';
+                    let badgeText = 'Документ';
+                    
+                    if (module.type === 'shtraf') {
+                        badgeClass = 'badge-shtraf';
+                        badgeText = 'Штраф';
+                    } else if (module.type === 'zhaloba') {
+                        badgeClass = 'badge-zhaloba';
+                        badgeText = 'Жалоба';
+                    } else if (module.type === 'dogovor') {
+                        badgeClass = 'badge-dogovor';
+                        badgeText = 'Договор';
+                    }
+                    
                     card.innerHTML = 
                         <a href="/pwa-35-docs/modules/"></a>
                         <span class="module-badge "></span>
@@ -130,42 +130,58 @@
                     container.appendChild(card);
                 });
             });
-            
-            // Обновляем счетчик
-            document.getElementById('modulesCount').textContent = 
-                Всего документов:  из 35;
         }
 
-        // Функция поиска
+        // Поиск
         function searchModules() {
             const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const container = document.getElementById('modulesContainer');
             
-            if (searchText.trim() === '') {
-                displayModules(modulesData);
+            if (!searchText) {
+                displayModules();
                 return;
             }
             
-            const filtered = modulesData.filter(module => 
-                module.name.toLowerCase().includes(searchText) ||
-                module.category.toLowerCase().includes(searchText)
+            const filtered = modulesData.filter(m => 
+                m.name.toLowerCase().includes(searchText) || 
+                m.category.toLowerCase().includes(searchText)
             );
             
-            displayModules(filtered);
-        }
-
-        // Инициализация
-        document.addEventListener('DOMContentLoaded', () => {
-            displayModules(modulesData);
-        });
-
-        // Регистрация Service Worker для PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/pwa-35-docs/sw.js')
-                    .then(reg => console.log('✅ SW зарегистрирован'))
-                    .catch(err => console.log('❌ SW ошибка:', err));
+            container.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem;">Ничего не найдено</div>';
+                return;
+            }
+            
+            filtered.forEach(module => {
+                const card = document.createElement('div');
+                card.className = 'module-card';
+                
+                let badgeClass = 'badge-default';
+                let badgeText = 'Документ';
+                
+                if (module.type === 'shtraf') {
+                    badgeClass = 'badge-shtraf';
+                    badgeText = 'Штраф';
+                } else if (module.type === 'zhaloba') {
+                    badgeClass = 'badge-zhaloba';
+                    badgeText = 'Жалоба';
+                } else if (module.type === 'dogovor') {
+                    badgeClass = 'badge-dogovor';
+                    badgeText = 'Договор';
+                }
+                
+                card.innerHTML = 
+                    <a href="/pwa-35-docs/modules/"></a>
+                    <span class="module-badge "></span>
+                ;
+                container.appendChild(card);
             });
         }
+
+        // Запускаем при загрузке
+        displayModules();
     </script>
 </body>
 </html>
