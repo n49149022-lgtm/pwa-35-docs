@@ -1,43 +1,38 @@
-﻿<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жалоба на штраф | Обжалование штрафа</title>
-    <link rel="stylesheet" href="/pwa-35-docs/css/style.css">
-    <link rel="manifest" href="/pwa-35-docs/manifest.json">
-</head>
-<body>
-    <div class="nav">
-        <a href="/pwa-35-docs/">← На главную</a>
-    </div>
+﻿<div style="margin: 30px 0; text-align: center;">
+    <div style="font-size: 28px; font-weight: bold; color: #28a745; margin-bottom: 10px;">199 ₽</div>
+    <button onclick="downloadDocument()" style="
+        background: #ffc107;
+        color: #212529;
+        border: none;
+        border-radius: 50px;
+        padding: 15px 40px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s;
+    ">📥 Скачать за 199 ₽</button>
+    <p style="margin-top: 10px; color: #666; font-size: 14px;">После оплаты документ сформируется и скачается</p>
+</div>
+
+<script>
+function downloadDocument() {
+    // Здесь будет интеграция с ЮKassa
+    alert("Оплата через ЮKassa\\nСумма: 199 ₽\\n\\nПосле подтверждения платежа документ скачается автоматически");
     
-    <div class="module-container">
-        <h1>Жалоба на штраф</h1>
+    // Заглушка - просто покажем, что будет скачиваться
+    setTimeout(() => {
+        const content = document.getElementById('docForm') ? 
+            "Сформированный документ на основе заполненных данных" : 
+            "Документ по шаблону";
         
-        <form id="shtrafForm">
-            <div class="form-group">
-                <label for="fio">ФИО:</label>
-                <input type="text" id="fio" name="fio" placeholder="Иванов Иван Иванович" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="docNumber">Номер постановления:</label>
-                <input type="text" id="docNumber" name="docNumber" placeholder="18810177210123456789" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="docDate">Дата постановления:</label>
-                <input type="date" id="docDate" name="docDate" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="shtrafSum">Сумма штрафа:</label>
-                <input type="number" id="shtrafSum" name="shtrafSum" placeholder="5000" required>
-            </div>
-            
-            <button type="button" class="btn" onclick="alert('Генерация штрафа в разработке')">Сформировать жалобу</button>
-        </form>
-    </div>
+        const blob = new Blob([content], {type: 'text/plain'});
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'document.txt';
+        a.click();
+    }, 1500);
+}
+</script>
 </body>
-</html>

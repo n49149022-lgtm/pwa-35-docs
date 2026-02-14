@@ -2,140 +2,70 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>35 шаблонов документов</title>
+    <title>35 генераторов документов</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
+        body { font-family: Arial; max-width: 900px; margin: 0 auto; padding: 20px; background: #f8f9fa; }
+        h1 { color: #2c3e50; text-align: center; }
+        .count { text-align: center; color: #7f8c8d; margin-bottom: 30px; }
+        ul { columns: 2; list-style: none; padding: 0; }
+        li { margin: 8px; break-inside: avoid; }
+        a { 
+            display: block; 
+            padding: 12px 15px; 
+            background: white; 
+            text-decoration: none; 
+            color: #3498db;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: 0.2s;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .header p {
-            font-size: 1.2rem;
-            color: #666;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .card h3 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.2rem;
-        }
-        .price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #28a745;
-            margin-bottom: 15px;
-        }
-        .price::after {
-            content: " ₽";
-        }
-        .buy-btn {
-            background: #ffc107;
-            color: #212529;
-            border: none;
-            border-radius: 6px;
-            padding: 12px;
-            width: 100%;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .buy-btn:hover {
-            background: #e0a800;
+        a:hover { 
+            background: #3498db; 
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(52,152,219,0.3);
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>📄 35 шаблонов документов</h1>
-        <p>Выберите нужный шаблон и нажмите "Купить"</p>
-    </div>
-    
-    <div class="grid" id="grid"></div>
-
-    <script>
-        const templates = [
-            { name: "Обжалование штрафа", price: 299 },
-            { name: "Обжалование штрафа ГИБДД", price: 299 },
-            { name: "Жалоба на штраф", price: 299 },
-            { name: "Жалоба в УК", price: 199 },
-            { name: "Жалоба на банк", price: 199 },
-            { name: "Жалоба на страховую", price: 199 },
-            { name: "Жалоба на детский сад", price: 199 },
-            { name: "Жалоба на такси", price: 199 },
-            { name: "Жалоба на автосервис", price: 199 },
-            { name: "Жалоба на связь", price: 199 },
-            { name: "Претензия провайдеру", price: 199 },
-            { name: "Претензия на технику", price: 199 },
-            { name: "Претензия ЖКХ", price: 199 },
-            { name: "Договор с кружком", price: 299 },
-            { name: "Договор с няней", price: 299 },
-            { name: "Договор с репетитором", price: 299 },
-            { name: "Договор купли-продажи", price: 299 },
-            { name: "Алименты", price: 399 },
-            { name: "Согласие на выезд ребенка", price: 99 },
-            { name: "Доверенность на авто", price: 199 },
-            { name: "Путевой лист", price: 199 },
-            { name: "ИП на УСН 6%", price: 299 },
-            { name: "КУДиР", price: 299 },
-            { name: "Штатное расписание", price: 299 },
-            { name: "Перерасчет ЖКХ", price: 199 },
-            { name: "Субсидия ЖКХ", price: 199 },
-            { name: "Перерасчет (ниже тарифа)", price: 199 },
-            { name: "Протокол ТСЖ", price: 199 },
-            { name: "Авиакомпенсация", price: 399 },
-            { name: "Задержка рейса", price: 399 },
-            { name: "Возврат тура", price: 399 },
-            { name: "Исковое заявление", price: 399 },
-            { name: "Расписка за телефон", price: 99 },
-            { name: "Справка в детский сад", price: 99 },
-            { name: "Шаблон документа", price: 99 }
-        ];
-
-        const grid = document.getElementById('grid');
-        
-        templates.sort((a, b) => a.name.localeCompare(b.name)).forEach(t => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = \
-                <h3>\</h3>
-                <div class="price">\</div>
-                <button class="buy-btn" onclick="buy('\', \)">Купить</button>
-            \;
-            grid.appendChild(card);
-        });
-
-        function buy(name, price) {
-            alert(\Покупка: \zhaloba-uk\nЦена: \ ₽\n\nЗдесь будет интеграция с ЮKassa\);
-        }
-    </script>
+    <h1>📄 35 генераторов документов</h1>
+    <div class="count">Выберите нужный шаблон:</div>
+    <ul>
+        <li><a href="modules/alimenty.html">Алименты на ребенка</a></li>
+        <li><a href="modules/aviakompensaciya.html">Авиакомпенсация</a></li>
+        <li><a href="modules/dogovor-kruzhok.html">Договор с кружком</a></li>
+        <li><a href="modules/dogovor-nyanya.html">Договор с няней</a></li>
+        <li><a href="modules/dogovor-repetitor.html">Договор с репетитором</a></li>
+        <li><a href="modules/dogovor-kupli-prodazhi.html">Договор купли-продажи</a></li>
+        <li><a href="modules/doverennost-avto.html">Доверенность на авто</a></li>
+        <li><a href="modules/ip-usn6.html">ИП на УСН 6%</a></li>
+        <li><a href="modules/isk-zayavlenie.html">Исковое заявление</a></li>
+        <li><a href="modules/kudir.html">КУДиР</a></li>
+        <li><a href="modules/nizhe-tarifa.html">Перерасчет ЖКХ (ниже тарифа)</a></li>
+        <li><a href="modules/pereraschet-zhkh.html">Перерасчет ЖКХ</a></li>
+        <li><a href="modules/pretenziya-internet.html">Претензия провайдеру</a></li>
+        <li><a href="modules/pretenziya-tehnika.html">Претензия на технику</a></li>
+        <li><a href="modules/pretenziya-zhkh.html">Претензия ЖКХ</a></li>
+        <li><a href="modules/protokol-tszh.html">Протокол ТСЖ</a></li>
+        <li><a href="modules/putevoy-list.html">Путевой лист</a></li>
+        <li><a href="modules/raspiska-telefon.html">Расписка за телефон</a></li>
+        <li><a href="modules/shtatnoe-raspisanie.html">Штатное расписание</a></li>
+        <li><a href="modules/shtraf-gibdd.html">Обжалование штрафа ГИБДД</a></li>
+        <li><a href="modules/shtraf.html">Обжалование штрафа</a></li>
+        <li><a href="modules/soglasie-rebenok.html">Согласие на выезд ребенка</a></li>
+        <li><a href="modules/spravka-sadik.html">Справка в детский сад</a></li>
+        <li><a href="modules/subsidiya-zhkh.html">Субсидия ЖКХ</a></li>
+        <li><a href="modules/template.html">Шаблон документа</a></li>
+        <li><a href="modules/vozvrat-tura.html">Возврат тура</a></li>
+        <li><a href="modules/zaderzhka-reysa.html">Задержка рейса</a></li>
+        <li><a href="modules/zhaloba-autoservice.html">Жалоба на автосервис</a></li>
+        <li><a href="modules/zhaloba-bank.html">Жалоба на банк</a></li>
+        <li><a href="modules/zhaloba-detsad.html">Жалоба на детский сад</a></li>
+        <li><a href="modules/zhaloba-shtraf.html">Жалоба на штраф</a></li>
+        <li><a href="modules/zhaloba-strahovaya.html">Жалоба на страховую</a></li>
+        <li><a href="modules/zhaloba-svyaz.html">Жалоба на связь</a></li>
+        <li><a href="modules/zhaloba-taksi.html">Жалоба на такси</a></li>
+        <li><a href="modules/zhaloba-uk.html">Жалоба в УК</a></li>
+    </ul>
 </body>
 </html>
